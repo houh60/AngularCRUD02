@@ -17,7 +17,7 @@ export class ListEmployeesComponent {
       dateOfBirth: new Date('10/25/1988'),
       department: 'IT',
       isActive: true,
-      photoPath: 'images/mark.png'
+      photoPath: 'assets/images/mark.png'
     },
     {
       id: 2,
@@ -28,7 +28,7 @@ export class ListEmployeesComponent {
       dateOfBirth: new Date('11/20/1979'),
       department: 'HR',
       isActive: true,
-      photoPath: '../../../assets/images/mary.png'
+      photoPath: 'assets/images/mary.png'
     },
     {
       id: 3,

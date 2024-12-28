@@ -5,6 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ListEmployeesComponent } from './employees/list-employees/list-employees.component';
 import { CreateEmployeeComponent } from './employees/create-employee/create-employee.component';
+import { FormsModule } from '@angular/forms';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -14,9 +17,12 @@ import { CreateEmployeeComponent } from './employees/create-employee/create-empl
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    BsDatepickerModule.forRoot(),
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

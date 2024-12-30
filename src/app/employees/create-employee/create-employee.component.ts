@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Department } from '../../models/department.model';
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 
 @Component({
   selector: 'app-create-employee',
@@ -23,6 +24,21 @@ export class CreateEmployeeComponent {
   ];
   department = '';
   dateOfBirth = null;
+  photoPath = '';
+  previewPhoto = false;
+
+  datePickerConfig: Partial<BsDatepickerConfig> = Object.assign({},
+    {
+      containerClass: 'theme-dark-blue',
+      showWeekNumbers: false,
+      maxDate: new Date(new Date().getFullYear() - 18, new Date().getMonth(), new Date().getDate()),
+      dateInputFormat: 'YYYY/MM/DD'
+    }
+  );
+
+  togglePhotoPreview() {
+    this.previewPhoto = !this.previewPhoto;
+  }
 
   saveEmployee(empForm: NgForm) {
     // console.log("empForm: ", empForm);

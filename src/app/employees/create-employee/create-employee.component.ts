@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Department } from '../../models/department.model';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+import { Employee } from '../../models/employee.model';
 
 @Component({
   selector: 'app-create-employee',
@@ -9,12 +10,6 @@ import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
   styleUrl: './create-employee.component.css'
 })
 export class CreateEmployeeComponent {
-  fullName = '';
-  email = '';
-  gender = '';
-  phoneNumber = '';
-  contactPreference = '';
-  isActive = false;
   departments: Department[] = [
     { id: 1, name: 'Help Desk' },
     { id: 2, name: 'HR' },
@@ -22,10 +17,21 @@ export class CreateEmployeeComponent {
     { id: 4, name: 'Paroll' },
     { id: 5, name: 'Admin' }
   ];
-  department = '';
-  dateOfBirth = null;
-  photoPath = '';
   previewPhoto = false;
+  employee: Employee = {
+    id: null,
+    name: null,
+    gender: null,
+    email: null,
+    phoneNumber: null,
+    contactPreference: null,
+    dateOfBirth: null,
+    department: null,
+    isActive: null,
+    photoPath: null,
+  };
+  emailPattern = new RegExp(/^[a-zA-Z0-9_.+\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-.]+$/);
+  pragEmailPattern = new RegExp(/^[a-zA-Z0-9_.+\-]+@(?:(?:[a-zA-Z0-9\-]+\.)?[a-zA-Z]+\.)?(pragimtech)\.com$/);
 
   datePickerConfig: Partial<BsDatepickerConfig> = Object.assign({},
     {
@@ -36,12 +42,51 @@ export class CreateEmployeeComponent {
     }
   );
 
+  male = false;
+  female = false;
+  contactPreferenceEmail = false;
+  contactPreferencePhone = false;
+
+  constructor(private changeDetector: ChangeDetectorRef) {}
+
+  ngAfterViewChecked() {
+    this.changeDetector.detectChanges();
+  }
+
   togglePhotoPreview() {
     this.previewPhoto = !this.previewPhoto;
   }
 
-  saveEmployee(empForm: NgForm) {
+  toggleMale() {
+    this.male = !this.male;
+    if (!this.male) {
+      this.employee.gender = null;
+    }
+  }
+
+  toggleFemale() {
+    this.female = !this.female;
+    if (!this.female) {
+      this.employee.gender = null;
+    }
+  }
+
+  toggleContactPreferenceEmail() {
+    this.contactPreferenceEmail = !this.contactPreferenceEmail;
+    if (!this.contactPreferenceEmail) {
+      this.employee.contactPreference = null;
+    }
+  }
+
+  toggleContactPreferencePhone() {
+    this.contactPreferencePhone = !this.contactPreferencePhone;
+    if (!this.contactPreferencePhone) {
+      this.employee.contactPreference = null;
+    }
+  }
+
+  saveEmployee(employee: Employee) {
     // console.log("empForm: ", empForm);
-    console.log("empForm.value: ", empForm.value);
+    console.log("employee: ", employee);
   }
 }

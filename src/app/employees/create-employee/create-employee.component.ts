@@ -11,6 +11,7 @@ import { Employee } from '../../models/employee.model';
 })
 export class CreateEmployeeComponent {
   departments: Department[] = [
+    { id: 0, name: 'Select Department' },
     { id: 1, name: 'Help Desk' },
     { id: 2, name: 'HR' },
     { id: 3, name: 'IT' },
@@ -26,7 +27,7 @@ export class CreateEmployeeComponent {
     phoneNumber: null,
     contactPreference: null,
     dateOfBirth: null,
-    department: null,
+    department: 0,
     isActive: null,
     photoPath: null,
   };
@@ -46,6 +47,8 @@ export class CreateEmployeeComponent {
   female = false;
   contactPreferenceEmail = false;
   contactPreferencePhone = false;
+  yes = false;
+  no = false;
 
   constructor(private changeDetector: ChangeDetectorRef) {}
 
@@ -82,6 +85,20 @@ export class CreateEmployeeComponent {
     this.contactPreferencePhone = !this.contactPreferencePhone;
     if (!this.contactPreferencePhone) {
       this.employee.contactPreference = null;
+    }
+  }
+
+  toggleIsActiveYes() {
+    this.yes = !this.yes;
+    if (!this.yes) {
+      this.employee.isActive = null;
+    }
+  }
+
+  toggleIsActiveNo() {
+    this.no = !this.no;
+    if (!this.no) {
+      this.employee.isActive = null;
     }
   }
 

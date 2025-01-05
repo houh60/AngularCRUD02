@@ -54,7 +54,7 @@
           Preference is required</span>
       </div>
 
-      <div class="form-group" [class.has-error]="gender.touched && gender.invalid" [class.has-success]="gender.valid">
+      <div class="form-group" [class.has-error]="gender.touched && gender.invalid">
         <label class="control-label">Gender</label>
         <div class="form-control">
           <label for="male" class="radio-inline">
@@ -72,25 +72,31 @@
           required</span>
       </div>
 
-      <div class="form-group" [class.has-error]="isActive.touched && isActive.value == null">
+      <div class="form-group" [class.has-error]="isActive.touched && isActive.invalid">
+        <label class="control-label">Is Active</label>
         <div class="form-control">
-          <label for="isActive" class="checkbox-inline control-label">
-            <input type="checkbox" id="isActive" name="isActive" value="isActive" [(ngModel)]="employee.isActive"
-              required #isActive="ngModel">
-            Is Active
+          <label for="yes" class="radio-inline">
+            <input type="radio" id="yes" required name="isActive" value="yes" [(ngModel)]="employee.isActive"
+              #isActive="ngModel" [checked]="yes" (click)="toggleIsActiveYes()">Yes
+          </label>
+          <label for="no" class="radio-inline">
+            <input type="radio" id="no" name="isActive" value="false" [(ngModel)]="employee.isActive"
+              #isActive="ngModel" [checked]="no" (click)="toggleIsActiveNo()">No
           </label>
         </div>
-        <span class="help-block" *ngIf="isActive.touched && isActive.value == null">Is-active is
+        <span class="help-block" *ngIf="isActive.touched && isActive.errors && isActive.errors['required']">Is-active is
           required</span>
       </div>
 
-      <div class="form-group">
-        <label for="department">
-          Department
-        </label>
-        <select name="department" id="department" [(ngModel)]="employee.department" class="form-control">
-          <option *ngFor="let dept of departments" [value]="dept.id">{{dept.name}}</option>
+      <div class="form-group" [class.has-error]="department.touched && department.invalid">
+        <label for="department" class="control-label">Department</label>
+        <select name="department" id="department" [(ngModel)]="employee.department" class="form-control"
+          appSelectValidator="{{departments[0].id}}" #department="ngModel">
+          <option *ngFor="let dept of departments" [ngValue]="dept.id">{{dept.name}}</option>
         </select>
+        <span class="help-block"
+          *ngIf="department.touched && department.errors && department.errors['defaultSelected']">Department is
+          required</span>
       </div>
 
       <div class="row">

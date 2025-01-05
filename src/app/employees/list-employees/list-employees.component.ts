@@ -15,7 +15,7 @@ export class ListEmployeesComponent {
       contactPreference: 'Email',
       email: 'mark@pragimtech.com',
       dateOfBirth: new Date('10/25/1988'),
-      department: 'IT',
+      department: 3,
       isActive: true,
       photoPath: 'assets/images/mark.png'
     },
@@ -26,7 +26,7 @@ export class ListEmployeesComponent {
       contactPreference: 'Phone',
       phoneNumber: 2345978640,
       dateOfBirth: new Date('11/20/1979'),
-      department: 'HR',
+      department: 2,
       isActive: true,
       photoPath: 'assets/images/mary.png'
     },
@@ -37,7 +37,7 @@ export class ListEmployeesComponent {
       contactPreference: 'Phone',
       phoneNumber: 5432978640,
       dateOfBirth: new Date('3/25/1976'),
-      department: 'IT',
+      department: 3,
       isActive: false,
       photoPath: 'assets/images/john.png'
     },

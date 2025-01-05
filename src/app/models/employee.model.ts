@@ -6,7 +6,7 @@ export interface Employee {
   phoneNumber?: number;
   contactPreference: string;
   dateOfBirth: Date;
-  department: string;
+  department: number;
   isActive: boolean;
   photoPath?: string;
 }

@@ -8,12 +8,14 @@ import { CreateEmployeeComponent } from './employees/create-employee/create-empl
 import { FormsModule } from '@angular/forms';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SelectRequiredValidatorDirective } from './shared/select-required-validator.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListEmployeesComponent,
-    CreateEmployeeComponent
+    CreateEmployeeComponent,
+    SelectRequiredValidatorDirective
   ],
   imports: [
     BrowserModule,

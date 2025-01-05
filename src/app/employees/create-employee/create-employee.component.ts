@@ -30,6 +30,8 @@ export class CreateEmployeeComponent {
     department: 0,
     isActive: null,
     photoPath: null,
+    password: null,
+    confirmPassword: null,
   };
   emailPattern = new RegExp(/^[a-zA-Z0-9_.+\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-.]+$/);
   pragEmailPattern = new RegExp(/^[a-zA-Z0-9_.+\-]+@(?:(?:[a-zA-Z0-9\-]+\.)?[a-zA-Z]+\.)?(pragimtech)\.com$/);

@@ -1,4 +1,4 @@
-<form #employeeForm="ngForm" ngNativeValidate (ngSubmit)="saveEmployee(employee)">
+<form #employeeForm="ngForm" ngNativeValidate (ngSubmit)="saveEmployee()">
   <div class="panel panel-primary">
     <div class="panel-heading">
       <h3 class="panel-title">Create Employee</h3>
@@ -11,15 +11,13 @@
         <span class="help-block" *ngIf="name.touched && name.invalid">Full Name is required</span>
       </div>
 
-      <div class="form-group" [class.has-error]="email.invalid"
-        [class.has-success]="contactPreference.value == 'email' && email.valid">
+      <div class="form-group" [class.has-error]="email.invalid">
         <label for="email" class="control-label">Email</label>
-        <input type="text" id="email" class="form-control" [(ngModel)]="employee.email" name="email"
-          [required]="contactPreference.value == 'email' && contactPreference.value != null" #email="ngModel"
-          [pattern]="emailPattern">
+        <input type="email" id="email" class="form-control" [(ngModel)]="employee.email" name="email" email
+          [required]="contactPreference.value == 'email' && contactPreference.value != null" #email="ngModel">
         <span class="help-block" *ngIf="email.errors && email.errors['required']">Email is
           required</span>
-        <span class="help-block" *ngIf="email.errors && email.errors['pattern']">Email is
+        <span class="help-block" *ngIf="email.invalid && !(email.errors && email.errors['required'])">Email is
           invalid</span>
       </div>
 
@@ -32,8 +30,7 @@
           required</span>
       </div>
 
-      <div class="form-group" [class.has-error]="contactPreference.touched && contactPreference.invalid"
-        [class.has-success]="contactPreference.valid">
+      <div class="form-group" [class.has-error]="contactPreference.touched && contactPreference.invalid">
         <label class="control-label">Contact Preference</label>
         <div class="form-control">
           <label for="e_mail" class="radio-inline">
@@ -121,7 +118,7 @@
         <img [src]="employee.photoPath" width="200" *ngIf="previewPhoto">
       </div>
 
-      <div ngModelGroup="passwordGroup" appConfirmEqualValidator #passwordGroup="ngModelGroup"
+      <!-- <div ngModelGroup="passwordGroup" appConfirmEqualValidator #passwordGroup="ngModelGroup"
         [class.has-error]="passwordGroup.errors && passwordGroup.errors['notEqual'] && !(confirmPassword.errors && confirmPassword.errors['required'])">
         <div class="form-group" [class.has-error]="password.touched && password.invalid">
           <label for="password" class="control-label">Password</label>
@@ -145,7 +142,7 @@
             Password and Confirm Password does not match
           </span>
         </div>
-      </div>
+      </div> -->
     </div>
 
     <div class="panel-footer">
@@ -153,15 +150,3 @@
     </div>
   </div>
 </form>
-
-Angular generated form model:
-<pre>
-  {{employeeForm.value | json}}
-</pre>
-<br>
-<br>
-
-Employee model:
-<pre>
-  {{employee | json}}
-</pre>

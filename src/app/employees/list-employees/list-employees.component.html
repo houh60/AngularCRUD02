@@ -54,7 +54,11 @@
               Department:
             </div>
             <div class="col-xs-6">
-              {{employee.department}}
+              @for (department of departments; track department) {
+              @if(employee.department == department.id) {
+              {{department.name}}
+              }
+              }
             </div>
           </div>
           <div class="row">

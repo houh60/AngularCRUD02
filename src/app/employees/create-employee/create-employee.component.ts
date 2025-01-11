@@ -1,23 +1,18 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Department } from '../../models/department.model';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { Employee } from '../../models/employee.model';
+import { EmployeeService } from '../employee.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-employee',
   templateUrl: './create-employee.component.html',
   styleUrl: './create-employee.component.css'
 })
-export class CreateEmployeeComponent {
-  departments: Department[] = [
-    { id: 0, name: 'Select Department' },
-    { id: 1, name: 'Help Desk' },
-    { id: 2, name: 'HR' },
-    { id: 3, name: 'IT' },
-    { id: 4, name: 'Paroll' },
-    { id: 5, name: 'Admin' }
-  ];
+export class CreateEmployeeComponent implements OnInit {
+  departments: Department[];
   previewPhoto = false;
   employee: Employee = {
     id: null,
@@ -33,8 +28,6 @@ export class CreateEmployeeComponent {
     password: null,
     confirmPassword: null,
   };
-  emailPattern = new RegExp(/^[a-zA-Z0-9_.+\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-.]+$/);
-  pragEmailPattern = new RegExp(/^[a-zA-Z0-9_.+\-]+@(?:(?:[a-zA-Z0-9\-]+\.)?[a-zA-Z]+\.)?(pragimtech)\.com$/);
 
   datePickerConfig: Partial<BsDatepickerConfig> = Object.assign({},
     {
@@ -52,7 +45,15 @@ export class CreateEmployeeComponent {
   yes = false;
   no = false;
 
-  constructor(private changeDetector: ChangeDetectorRef) {}
+  constructor(
+    private changeDetector: ChangeDetectorRef,
+    private employeeService: EmployeeService,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    this.departments = this.employeeService.getDepartments();
+  }
 
   ngAfterViewChecked() {
     this.changeDetector.detectChanges();
@@ -104,8 +105,8 @@ export class CreateEmployeeComponent {
     }
   }
 
-  saveEmployee(employee: Employee) {
-    // console.log("empForm: ", empForm);
-    console.log("employee: ", employee);
+  saveEmployee() {
+    this.employeeService.save(this.employee);
+    this.router.navigate(['list']);
   }
 }

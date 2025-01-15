@@ -12,13 +12,25 @@ export class ListEmployeesComponent implements OnInit {
 
   employees: Employee[];
   departments: Department[];
+  // employeeToDisplay: Employee;
+  // private arrayIndex = 1;
 
   constructor(private employeeService: EmployeeService) {}
 
   ngOnInit(): void {
     this.employees = this.employeeService.getEmployees();
     this.departments = this.employeeService.getDepartments();
+    // this.employeeToDisplay = this.employees[0];
   }
 
+  // nextEmployee() {
+  //   if (this.arrayIndex < this.employees.length) {
+  //     this.employeeToDisplay = this.employees[this.arrayIndex];
+  //     this.arrayIndex++;
+  //   } else {
+  //     this.employeeToDisplay = this.employees[0];
+  //     this.arrayIndex = 1;
+  //   }
+  // }
 
 }

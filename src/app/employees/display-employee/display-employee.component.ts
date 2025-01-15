@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Employee } from '../../models/employee.model';
 import { EmployeeService } from '../employee.service';
 import { Department } from '../../models/department.model';
@@ -13,6 +13,8 @@ export class DisplayEmployeeComponent implements OnInit, OnChanges {
   departments: Department[];
 
   @Input() employee: Employee;
+
+  @Output() notify = new EventEmitter();
 
   // private _employeeId: number;
   // @Input()
@@ -53,6 +55,10 @@ export class DisplayEmployeeComponent implements OnInit, OnChanges {
     //     console.log(propName + ' changed from ' + from + ' to ' + to);
     //   }
     // }
+  }
+
+  handleClick() {
+    this.notify.emit(this.employee);
   }
 
 }

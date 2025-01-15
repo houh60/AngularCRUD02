@@ -12,6 +12,8 @@ export class ListEmployeesComponent implements OnInit {
 
   employees: Employee[];
   departments: Department[];
+  dataFromChild: any;
+
   // employeeToDisplay: Employee;
   // private arrayIndex = 1;
 
@@ -21,6 +23,10 @@ export class ListEmployeesComponent implements OnInit {
     this.employees = this.employeeService.getEmployees();
     this.departments = this.employeeService.getDepartments();
     // this.employeeToDisplay = this.employees[0];
+  }
+
+  handleNotify(eventData: any) {
+    this.dataFromChild = eventData;
   }
 
   // nextEmployee() {

@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
 import { Employee } from '../../models/employee.model';
 import { EmployeeService } from '../employee.service';
 import { Department } from '../../models/department.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-display-employee',
@@ -35,7 +36,10 @@ export class DisplayEmployeeComponent implements OnInit, OnChanges {
   // }
 
 
-  constructor(private employeeService: EmployeeService) {}
+  constructor(
+    private employeeService: EmployeeService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.departments = this.employeeService.getDepartments();
@@ -63,6 +67,10 @@ export class DisplayEmployeeComponent implements OnInit, OnChanges {
 
   getEmployeeNameAndGender(): string {
     return this.employee.name + ': ' + this.employee.gender;
+  }
+
+  showDetails(id: number) {
+    this.router.navigate(['/employees', id]);
   }
 
 }

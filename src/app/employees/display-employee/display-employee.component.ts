@@ -14,7 +14,7 @@ export class DisplayEmployeeComponent implements OnInit, OnChanges {
 
   @Input() employee: Employee;
 
-  @Output() notify = new EventEmitter();
+  // @Output() notify = new EventEmitter();
 
   // private _employeeId: number;
   // @Input()
@@ -57,8 +57,12 @@ export class DisplayEmployeeComponent implements OnInit, OnChanges {
     // }
   }
 
-  handleClick() {
-    this.notify.emit(this.employee);
+  // handleClick() {
+  //   this.notify.emit(this.employee);
+  // }
+
+  getEmployeeNameAndGender(): string {
+    return this.employee.name + ': ' + this.employee.gender;
   }
 
 }

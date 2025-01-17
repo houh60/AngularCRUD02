@@ -11,6 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SelectRequiredValidatorDirective } from './shared/select-required-validator.directive';
 import { ConfirmEqualValidatorDirective } from './shared/confirm-equal-validator.directive';
 import { DisplayEmployeeComponent } from './employees/display-employee/display-employee.component';
+import { CanDeactivateGuardService } from './employees/can-deactivate-guard.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { DisplayEmployeeComponent } from './employees/display-employee/display-e
     BsDatepickerModule.forRoot(),
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [CanDeactivateGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -25,9 +25,9 @@ export class ListEmployeesComponent implements OnInit {
     // this.employeeToDisplay = this.employees[0];
   }
 
-  handleNotify(eventData: any) {
-    this.dataFromChild = eventData;
-  }
+  // handleNotify(eventData: any) {
+  //   this.dataFromChild = eventData;
+  // }
 
   // nextEmployee() {
   //   if (this.arrayIndex < this.employees.length) {

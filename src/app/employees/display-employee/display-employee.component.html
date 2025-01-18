@@ -1,6 +1,7 @@
 <div
   class="panel panel-primary pointerCursor"
   (click)="showDetails(employee.id)"
+  [class.panel-success]="employee.id == selectedEmployeeId"
 >
   <div class="panel-heading">
     <h3 class="panel-title">{{ employee.name }}</h3>

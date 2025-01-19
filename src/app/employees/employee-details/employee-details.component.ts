@@ -29,11 +29,6 @@ export class EmployeeDetailsComponent implements OnInit {
     this.employees = this.employeeService.getEmployees();
     this.departments = this.employeeService.getDepartments();
 
-    // this.route.params.subscribe(param => {
-    //   this.id = +param['id'];
-    //   this.employee = this.employeeService.getEmployee(this.id);
-    // });
-
     this.route.params.pipe(
       concatMap(params => {
         this.id = +params['id'];

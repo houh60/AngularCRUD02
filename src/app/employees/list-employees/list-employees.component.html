@@ -1,7 +1,3 @@
-<!-- <h1 *ngIf="dataFromChild">
-  {{ dataFromChild.name + ": " + dataFromChild.gender }}
-</h1> -->
-
 <div class="form-group">
   <input
     type="text"
@@ -20,27 +16,7 @@
 <br />
 
 <div *ngFor="let employee of filteredEmployees">
-  <app-display-employee [employee]="employee"></app-display-employee>
-</div>
-
-<!-- <h1 #h1Variable></h1>
-<div *ngFor="let employee of employees">
-  <div
-    (click)="h1Variable.innerHTML = childComponent.getEmployeeNameAndGender()"
-  >
-    <app-display-employee
-      [employee]="employee"
-      #childComponent
-    ></app-display-employee>
+  <div (click)="showDetails(employee.id)" class="pointerCursor">
+    <app-display-employee [employee]="employee"></app-display-employee>
   </div>
-</div> -->
-
-<!-- <button (click)="nextEmployee()" class="btn btn-primary">
-  View Next Employee
-</button>
-<br />
-<br />
-<app-display-employee
-  [employee]="employeeToDisplay"
-  [employeeId]="employeeToDisplay.id"
-></app-display-employee> -->
+</div>

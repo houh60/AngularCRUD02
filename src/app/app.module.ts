@@ -13,6 +13,7 @@ import { ConfirmEqualValidatorDirective } from './shared/confirm-equal-validator
 import { DisplayEmployeeComponent } from './employees/display-employee/display-employee.component';
 import { CanDeactivateGuardService } from './employees/can-deactivate-guard.service';
 import { EmployeeDetailsComponent } from './employees/employee-details/employee-details.component';
+import { EmployeeFilterPipe } from './employees/employee-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { EmployeeDetailsComponent } from './employees/employee-details/employee-
     SelectRequiredValidatorDirective,
     ConfirmEqualValidatorDirective,
     DisplayEmployeeComponent,
-    EmployeeDetailsComponent
+    EmployeeDetailsComponent,
+    EmployeeFilterPipe
   ],
   imports: [
     BrowserModule,

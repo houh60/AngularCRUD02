@@ -36,7 +36,11 @@ export class ListEmployeesComponent implements OnInit {
     this.departments = this.employeeService.getDepartments();
     this.filteredEmployees = this.employees;
     this.route.snapshot.queryParamMap.has('searchTerm');
-    console.log("this.route.snapshot.queryParamMap.has('searchTerm'): ", this.route.snapshot.queryParamMap.has('searchTerm'));
+    if (this.route.snapshot.queryParamMap.has('searchTerm')) {
+      this.searchTerm = this.route.snapshot.queryParamMap.get('searchTerm');
+    } else {
+      this.filteredEmployees = this.employees;
+    }
   }
 
   filterEmployees(searchString: string) {

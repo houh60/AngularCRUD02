@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Employee } from '../../models/employee.model';
 import { EmployeeService } from '../employee.service';
 import { Department } from '../../models/department.model';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-employees',
@@ -28,12 +28,15 @@ export class ListEmployeesComponent implements OnInit {
   constructor(
     private employeeService: EmployeeService,
     private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     this.employees = this.employeeService.getEmployees();
     this.departments = this.employeeService.getDepartments();
     this.filteredEmployees = this.employees;
+    this.route.snapshot.queryParamMap.has('searchTerm');
+    console.log("this.route.snapshot.queryParamMap.has('searchTerm'): ", this.route.snapshot.queryParamMap.has('searchTerm'));
   }
 
   filterEmployees(searchString: string) {
@@ -46,7 +49,9 @@ export class ListEmployeesComponent implements OnInit {
   }
 
   showDetails(id: number) {
-    this.router.navigate(['/employees', id]);
+    this.router.navigate(['/employees', id], {
+      queryParams: { 'searchTerm': this.searchTerm, 'testParam': 'testValue' }
+    });
   }
 
 }

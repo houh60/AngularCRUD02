@@ -45,7 +45,9 @@ export class EmployeeDetailsComponent implements OnInit {
     } else {
       this.id = 1;
     }
-    this.router.navigate(['/employees', this.id]);
+    this.router.navigate(['/employees', this.id], {
+      queryParamsHandling: 'preserve'
+    });
   }
 
 }

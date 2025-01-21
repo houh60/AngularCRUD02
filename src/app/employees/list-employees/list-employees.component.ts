@@ -29,13 +29,9 @@ export class ListEmployeesComponent implements OnInit {
     private employeeService: EmployeeService,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) {
+    this.employees = this.route.snapshot.data['employeeList'];
 
-  ngOnInit(): void {
-    this.employees = this.employeeService.getEmployees();
-    this.departments = this.employeeService.getDepartments();
-    this.filteredEmployees = this.employees;
-    this.route.snapshot.queryParamMap.has('searchTerm');
     if (this.route.snapshot.queryParamMap.has('searchTerm')) {
       this.searchTerm = this.route.snapshot.queryParamMap.get('searchTerm');
     } else {
@@ -43,8 +39,12 @@ export class ListEmployeesComponent implements OnInit {
     }
   }
 
+  ngOnInit(): void {
+    this.employeeService.getDepartments().subscribe(departments => this.departments = departments);
+  }
+
   filterEmployees(searchString: string) {
-    return this.employees.filter(employee => employee.name.toLowerCase().indexOf(searchString.toLowerCase()) != -1);
+    return this.employees && this.employees.filter(employee => employee.name.toLowerCase().indexOf(searchString.toLowerCase()) != -1);
   }
 
   changeEmployeeName() {

@@ -55,7 +55,7 @@ export class CreateEmployeeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.departments = this.employeeService.getDepartments();
+    this.employeeService.getDepartments().subscribe(departments => this.departments = departments);
   }
 
   ngAfterViewChecked() {

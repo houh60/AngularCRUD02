@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Employee } from '../models/employee.model';
 import { Department } from '../models/department.model';
+import { Observable, of, delay } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -60,16 +61,16 @@ export class EmployeeService {
 
   constructor() {}
 
-  getEmployees(): Employee[] {
-    return this.listEmployees;
+  getEmployees(): Observable<Employee[]> {
+    return of(this.listEmployees).pipe(delay(2000));
   }
 
-  getEmployee(id: number): Employee {
-    return this.listEmployees.find(e => e.id == id);
+  getEmployee(id: number): Observable<Employee> {
+    return of(this.listEmployees.find(e => e.id == id));
   }
 
   getDepartments() {
-    return this.departments;
+    return of(this.departments);
   }
 
   save(employee: Employee) {

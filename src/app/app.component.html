@@ -6,5 +6,6 @@
       <li><a [routerLink]="['/employees', 2]">Get Employee with ID 2</a></li>
     </ul>
   </nav>
+  <div *ngIf="showLoadingIndicator">Loading...</div>
   <router-outlet></router-outlet>
 </div>

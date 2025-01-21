@@ -26,13 +26,15 @@ export class EmployeeDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.employees = this.employeeService.getEmployees();
-    this.departments = this.employeeService.getDepartments();
+    this.employeeService.getEmployees().subscribe(employees => {
+      this.employees = employees
+    });
+    this.employeeService.getDepartments().subscribe(departments => this.departments = departments);
 
     this.route.params.pipe(
       concatMap(params => {
         this.id = +params['id'];
-        return of(this.employeeService.getEmployee(this.id));
+        return this.employeeService.getEmployee(this.id);
       })
     ).subscribe(employee => {
       this.employee = employee;

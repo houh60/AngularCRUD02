@@ -21,7 +21,7 @@ export class DisplayEmployeeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.departments = this.employeeService.getDepartments();
+    this.employeeService.getDepartments().subscribe(departments => this.departments = departments);
     this.selectedEmployeeId = +this.route.snapshot.paramMap.get('id');
   }
 

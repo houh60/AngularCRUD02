@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavigationEnd, NavigationStart, Router } from '@angular/router';
+import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +16,11 @@ export class AppComponent {
     this.router.events.subscribe(routerEvent => {
       if (routerEvent instanceof NavigationStart) {
         this.showLoadingIndicator = true;
-      } else if (routerEvent instanceof NavigationEnd) {
+      } else if (
+        routerEvent instanceof NavigationEnd ||
+        routerEvent instanceof NavigationCancel ||
+        routerEvent instanceof NavigationError
+      ) {
         this.showLoadingIndicator = false;
       }
     });

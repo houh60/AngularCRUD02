@@ -65,8 +65,8 @@ export class EmployeeService {
     return of(this.listEmployees).pipe(delay(2000));
   }
 
-  getEmployee(id: number): Observable<Employee> {
-    return of(this.listEmployees.find(e => e.id == id));
+  getEmployee(id: number): Employee {
+    return this.listEmployees.find(e => e.id == id);
   }
 
   getDepartments() {

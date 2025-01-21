@@ -4,7 +4,7 @@ import { Department } from '../../models/department.model';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { Employee } from '../../models/employee.model';
 import { EmployeeService } from '../employee.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-employee',
@@ -17,20 +17,8 @@ export class CreateEmployeeComponent implements OnInit {
 
   departments: Department[];
   previewPhoto = false;
-  employee: Employee = {
-    id: null,
-    name: null,
-    gender: null,
-    email: null,
-    phoneNumber: null,
-    contactPreference: null,
-    dateOfBirth: null,
-    department: 0,
-    isActive: null,
-    photoPath: null,
-    password: null,
-    confirmPassword: null,
-  };
+  employee: Employee;
+  panelTitle: string;
 
   datePickerConfig: Partial<BsDatepickerConfig> = Object.assign({},
     {
@@ -51,11 +39,38 @@ export class CreateEmployeeComponent implements OnInit {
   constructor(
     private changeDetector: ChangeDetectorRef,
     private employeeService: EmployeeService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     this.employeeService.getDepartments().subscribe(departments => this.departments = departments);
+    this.route.paramMap.subscribe(param => {
+      const id = +param.get('id');
+      this.getEmployee(id);
+    });
+  }
+
+  private getEmployee(id: number) {
+    if (id == 0) {
+      this.employee = {
+        id: null,
+        name: null,
+        gender: null,
+        email: null,
+        phoneNumber: null,
+        contactPreference: null,
+        dateOfBirth: null,
+        department: 0,
+        isActive: null,
+        photoPath: null
+      };
+      this.panelTitle = 'Create'
+      this.createEmployeeForm?.reset();
+    } else {
+      this.panelTitle = 'Edit'
+      this.employee = Object.assign({}, this.employeeService.getEmployee(id));
+    }
   }
 
   ngAfterViewChecked() {

@@ -17,10 +17,8 @@ export class EmployeeService {
       email: 'mark@pragimtech.com',
       dateOfBirth: new Date('10/25/1988'),
       department: 3,
-      isActive: true,
-      photoPath: 'assets/images/mark.png',
-      password: '',
-      confirmPassword: ''
+      isActive: 'yes',
+      photoPath: 'assets/images/mark.png'
     },
     {
       id: 2,
@@ -30,10 +28,8 @@ export class EmployeeService {
       phoneNumber: 2345978640,
       dateOfBirth: new Date('11/20/1979'),
       department: 2,
-      isActive: true,
-      photoPath: 'assets/images/mary.png',
-      password: '',
-      confirmPassword: ''
+      isActive: 'yes',
+      photoPath: 'assets/images/mary.png'
     },
     {
       id: 3,
@@ -43,10 +39,8 @@ export class EmployeeService {
       phoneNumber: 5432978640,
       dateOfBirth: new Date('3/25/1976'),
       department: 3,
-      isActive: false,
-      photoPath: 'assets/images/john.png',
-      password: '',
-      confirmPassword: ''
+      isActive: 'no',
+      photoPath: 'assets/images/john.png'
     },
   ];
 
@@ -62,7 +56,7 @@ export class EmployeeService {
   constructor() {}
 
   getEmployees(): Observable<Employee[]> {
-    return of(this.listEmployees).pipe(delay(2000));
+    return of(this.listEmployees).pipe(delay(1000));
   }
 
   getEmployee(id: number): Employee {
@@ -74,6 +68,15 @@ export class EmployeeService {
   }
 
   save(employee: Employee) {
-    this.listEmployees.push(employee);
+    if (employee.id == null) {
+      const maxId = this.listEmployees.reduce(function(e1, e2) {
+        return e1.id > e2.id ? e1 : e2
+      }).id;
+      employee.id = maxId + 1;
+      this.listEmployees.push(employee);
+    } else {
+      const foundIndex = this.listEmployees.findIndex(e => e.id == employee.id)
+      this.listEmployees[foundIndex] = employee;
+    }
   }
 }

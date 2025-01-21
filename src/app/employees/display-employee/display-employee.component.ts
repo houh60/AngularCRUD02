@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Employee } from '../../models/employee.model';
 import { EmployeeService } from '../employee.service';
 import { Department } from '../../models/department.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-display-employee',
@@ -12,12 +12,14 @@ import { ActivatedRoute } from '@angular/router';
 export class DisplayEmployeeComponent implements OnInit {
 
   @Input() employee: Employee;
+  @Input() searchTerm: string
   departments: Department[];
   selectedEmployeeId: number;
 
   constructor(
     private employeeService: EmployeeService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -27,6 +29,16 @@ export class DisplayEmployeeComponent implements OnInit {
 
   getEmployeeNameAndGender(): string {
     return this.employee.name + ': ' + this.employee.gender;
+  }
+
+  viewEmployee() {
+    this.router.navigate(['/employees', this.employee.id], {
+      queryParams: { 'searchTerm': this.searchTerm }
+    });
+  }
+
+  editEmployee() {
+    this.router.navigate(['/edit', this.employee.id]);
   }
 
 }

@@ -67,7 +67,7 @@
     <a
       [routerLink]="['/list', { id: employee.id }]"
       class="btn btn-primary"
-      queryParamsHandling="merge"
+      queryParamsHandling="preserve"
       >Back to List</a
     >
     <button class="btn btn-primary pull-right" (click)="viewNextEmployee()">

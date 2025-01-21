@@ -7,8 +7,6 @@ export interface Employee {
   contactPreference: string;
   dateOfBirth: Date;
   department: number;
-  isActive: boolean;
+  isActive: string;
   photoPath?: string;
-  password: string;
-  confirmPassword: string;
 }

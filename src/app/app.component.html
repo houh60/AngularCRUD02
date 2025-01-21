@@ -2,8 +2,7 @@
   <nav class="navbar navbar-default">
     <ul class="nav navbar-nav">
       <li><a routerLink="list">List</a></li>
-      <li><a routerLink="create">Create</a></li>
-      <li><a [routerLink]="['/employees', 2]">Get Employee with ID 2</a></li>
+      <li><a routerLink="edit/0">Create</a></li>
     </ul>
   </nav>
   <div *ngIf="showLoadingIndicator" class="spinner"></div>

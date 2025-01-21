@@ -1,7 +1,7 @@
 <form #employeeForm="ngForm" ngNativeValidate (ngSubmit)="saveEmployee()">
   <div class="panel panel-primary">
     <div class="panel-heading">
-      <h3 class="panel-title">Create Employee</h3>
+      <h3 class="panel-title">{{ panelTitle }} Employee</h3>
     </div>
     <div class="panel-body">
       <div
@@ -34,7 +34,7 @@
           name="email"
           email
           [required]="
-            contactPreference.value == 'email' &&
+            contactPreference.value == 'Email' &&
             contactPreference.value != null
           "
           #email="ngModel"
@@ -60,7 +60,7 @@
           [(ngModel)]="employee.phoneNumber"
           name="phoneNumber"
           [required]="
-            contactPreference.value == 'phone' &&
+            contactPreference.value == 'Phone' &&
             contactPreference.value != null
           "
           #phoneNumber="ngModel"
@@ -86,7 +86,7 @@
               id="e_mail"
               required
               name="contactPreference"
-              value="email"
+              value="Email"
               [(ngModel)]="employee.contactPreference"
               [checked]="contactPreferenceEmail"
               (click)="toggleContactPreferenceEmail()"
@@ -99,7 +99,7 @@
               type="radio"
               id="phone"
               name="contactPreference"
-              value="phone"
+              value="Phone"
               [(ngModel)]="employee.contactPreference"
               [checked]="contactPreferencePhone"
               (click)="toggleContactPreferencePhone()"
@@ -131,7 +131,7 @@
               id="male"
               required
               name="gender"
-              value="male"
+              value="Male"
               [(ngModel)]="employee.gender"
               #gender="ngModel"
               [checked]="male"
@@ -144,7 +144,7 @@
               type="radio"
               id="female"
               name="gender"
-              value="female"
+              value="Female"
               [(ngModel)]="employee.gender"
               #gender="ngModel"
               [checked]="female"
@@ -175,7 +175,6 @@
               value="yes"
               [(ngModel)]="employee.isActive"
               #isActive="ngModel"
-              [checked]="yes"
               (click)="toggleIsActiveYes()"
             />Yes
           </label>
@@ -184,10 +183,9 @@
               type="radio"
               id="no"
               name="isActive"
-              value="false"
+              value="no"
               [(ngModel)]="employee.isActive"
               #isActive="ngModel"
-              [checked]="no"
               (click)="toggleIsActiveNo()"
             />No
           </label>
@@ -253,6 +251,7 @@
           class="form-control"
           [(ngModel)]="employee.photoPath"
           name="photoPath"
+          (input)="previewPhoto = false"
         />
       </div>
 
@@ -261,6 +260,7 @@
           type="button"
           class="btn btn-primary"
           (click)="togglePhotoPreview()"
+          *ngIf="employee.photoPath != '' && employee.photoPath != null"
         >
           {{ previewPhoto ? "Hide" : "Show" }} Preview
         </button>
@@ -282,3 +282,6 @@
     </div>
   </div>
 </form>
+
+employee:
+<pre>{{ employee | json }}</pre>

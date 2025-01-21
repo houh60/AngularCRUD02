@@ -47,15 +47,4 @@ export class ListEmployeesComponent implements OnInit {
     return this.employees && this.employees.filter(employee => employee.name.toLowerCase().indexOf(searchString.toLowerCase()) != -1);
   }
 
-  changeEmployeeName() {
-    this.employees[0].name = 'Jordan';
-    this.filteredEmployees = this.filterEmployees(this.searchTerm);
-  }
-
-  showDetails(id: number) {
-    this.router.navigate(['/employees', id], {
-      queryParams: { 'searchTerm': this.searchTerm }
-    });
-  }
-
 }

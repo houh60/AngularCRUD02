@@ -11,7 +11,7 @@ import { EmployeeDetailsGuardService } from './employees/employee-details-guard.
 const routes: Routes = [
   { path: 'list', component: ListEmployeesComponent, resolve: { employeeList: EmployeeListResolverService } },
   { path: 'employees/:id', component: EmployeeDetailsComponent, canActivate: [EmployeeDetailsGuardService] },
-  { path: 'create', component: CreateEmployeeComponent, canDeactivate: [CanDeactivateGuardService] },
+  { path: 'edit/:id', component: CreateEmployeeComponent, canDeactivate: [CanDeactivateGuardService] },
   { path: '', redirectTo: '/list', pathMatch: 'full' },
   { path: 'notfound', component: PageNotFoundComponent },
 ];

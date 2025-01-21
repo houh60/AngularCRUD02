@@ -8,15 +8,9 @@
   />
 </div>
 
-<div>
-  <button class="btn btn-primary" (click)="changeEmployeeName()">
-    Change Employee Name
-  </button>
-</div>
-<br />
-
 <div *ngFor="let employee of filteredEmployees">
-  <div (click)="showDetails(employee.id)" class="pointerCursor">
-    <app-display-employee [employee]="employee"></app-display-employee>
-  </div>
+  <app-display-employee
+    [employee]="employee"
+    [searchTerm]="searchTerm"
+  ></app-display-employee>
 </div>

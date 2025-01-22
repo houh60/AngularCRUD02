@@ -33,7 +33,15 @@ export class EmployeeDetailsComponent implements OnInit {
     } else {
       this.error = resolvedData;
     }
-    this.employeeService.getDepartments().subscribe(departments => this.departments = departments);
+
+    this.employeeService.getDepartments()
+      .subscribe(data => {
+        if (Array.isArray(data)) {
+          this.departments = data;
+        } else {
+          this.error = data;
+        }
+      });
 
     this.route.params.pipe(
       concatMap(params => {

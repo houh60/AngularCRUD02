@@ -46,7 +46,14 @@ export class ListEmployeesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.employeeService.getDepartments().subscribe(departments => this.departments = departments);
+    this.employeeService.getDepartments()
+      .subscribe(data => {
+        if (Array.isArray(data)) {
+          this.departments = data;
+        } else {
+          this.error = data;
+        }
+      });
   }
 
   filterEmployees(searchString: string) {

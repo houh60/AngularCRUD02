@@ -20,32 +20,24 @@ export class EmployeeService {
     { id: 5, name: 'Admin' }
   ];
 
-  baseUrl = 'http://localhost:3000/employees1';
+  baseUrl = 'http://localhost:3000/';
 
   constructor(
     private httpClient: HttpClient
   ) {}
 
   getEmployees(): Observable<Employee[] | Error> {
-    return this.httpClient.get<Employee[]>(this.baseUrl)
+    return this.httpClient.get<Employee[]>(this.baseUrl + 'employees1')
       .pipe(catchError(this.handleError));
-  }
-
-  private handleError(errorResponse: HttpErrorResponse) {
-    if (errorResponse.error instanceof ErrorEvent) {
-      console.log("Client side error: ", errorResponse.error.message);
-    } else {
-      console.log("Server side error: ", errorResponse);
-    }
-    return throwError(() => new Error('There is a problem with the service. We are notified and working on it. Please try again later.'));
   }
 
   getEmployee(id: number): Employee {
     return this.listEmployees.find(e => e.id == id);
   }
 
-  getDepartments() {
-    return of(this.departments);
+  getDepartments(): Observable<Department[] | Error> {
+    return this.httpClient.get<Department[]>(this.baseUrl + 'departments')
+      .pipe(catchError(this.handleError));
   }
 
   save(employee: Employee) {
@@ -66,5 +58,14 @@ export class EmployeeService {
     if (i != -1) {
       this.listEmployees.splice(i, 1)
     }
+  }
+
+  private handleError(errorResponse: HttpErrorResponse) {
+    if (errorResponse.error instanceof ErrorEvent) {
+      console.log("Client side error: ", errorResponse.error.message);
+    } else {
+      console.log("Server side error: ", errorResponse);
+    }
+    return throwError(() => new Error('There is a problem with the service. We are notified and working on it. Please try again later.'));
   }
 }

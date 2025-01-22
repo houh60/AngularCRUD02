@@ -35,6 +35,7 @@ export class CreateEmployeeComponent implements OnInit {
   contactPreferencePhone = false;
   yes = false;
   no = false;
+  error: any;
 
   constructor(
     private changeDetector: ChangeDetectorRef,
@@ -44,7 +45,14 @@ export class CreateEmployeeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.employeeService.getDepartments().subscribe(departments => this.departments = departments);
+    this.employeeService.getDepartments()
+      .subscribe(data => {
+        if (Array.isArray(data)) {
+          this.departments = data;
+        } else {
+          this.error = data;
+        }
+      });
     this.route.paramMap.subscribe(param => {
       const id = +param.get('id');
       this.getEmployee(id);

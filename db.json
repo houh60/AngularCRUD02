@@ -33,5 +33,31 @@
       "isActive": "no",
       "photoPath": "assets/images/john.png"
     }
+  ],
+  "departments": [
+    {
+      "id": 0,
+      "name": "Select Department"
+    },
+    {
+      "id": 1,
+      "name": "Help Desk"
+    },
+    {
+      "id": 2,
+      "name": "HR"
+    },
+    {
+      "id": 3,
+      "name": "IT"
+    },
+    {
+      "id": 4,
+      "name": "Paroll"
+    },
+    {
+      "id": 5,
+      "name": "Admin"
+    }
   ]
 }

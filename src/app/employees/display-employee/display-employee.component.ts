@@ -18,6 +18,7 @@ export class DisplayEmployeeComponent implements OnInit {
   departments: Department[];
   selectedEmployeeId: number;
   confirmDelete = false;
+  error: any;
 
   constructor(
     private employeeService: EmployeeService,
@@ -26,7 +27,14 @@ export class DisplayEmployeeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.employeeService.getDepartments().subscribe(departments => this.departments = departments);
+    this.employeeService.getDepartments()
+      .subscribe(data => {
+        if (Array.isArray(data)) {
+          this.departments = data;
+        } else {
+          this.error = data;
+        }
+      });
     this.selectedEmployeeId = +this.route.snapshot.paramMap.get('id');
   }
 

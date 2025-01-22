@@ -209,7 +209,7 @@
           id="department"
           [(ngModel)]="employee.department"
           class="form-control"
-          appSelectValidator="{{ departments[0].id }}"
+          appSelectValidator="{{ departments && departments[0].id }}"
           #department="ngModel"
         >
           <option *ngFor="let dept of departments" [ngValue]="dept.id">
@@ -282,6 +282,10 @@
     </div>
   </div>
 </form>
+
+<div *ngIf="error">
+  {{ error }}
+</div>
 
 employee:
 <pre>{{ employee | json }}</pre>

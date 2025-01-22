@@ -42,10 +42,11 @@ export class EmployeeDetailsComponent implements OnInit {
     this.route.params.pipe(
       concatMap(params => {
         this.id = +params['id'];
-        return of(this.employeeService.getEmployee(this.id));
+        return this.employeeService.getEmployee(this.id);
       })
-    ).subscribe(employee => {
-      this.employee = employee;
+    ).subscribe({
+      next: employee => this.employee = employee,
+      error: err => console.log("err: ", err)
     });
   }
 

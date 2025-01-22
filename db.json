@@ -1,7 +1,7 @@
 {
   "employees": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Mark",
       "gender": "Male",
       "contactPreference": "Email",
@@ -12,7 +12,7 @@
       "photoPath": "assets/images/mark.png"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Mary",
       "gender": "Female",
       "contactPreference": "Phone",
@@ -23,7 +23,7 @@
       "photoPath": "assets/images/mary.png"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "John",
       "gender": "Male",
       "contactPreference": "Phone",
@@ -36,27 +36,27 @@
   ],
   "departments": [
     {
-      "id": 0,
+      "id": "0",
       "name": "Select Department"
     },
     {
-      "id": 1,
+      "id": "1",
       "name": "Help Desk"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "HR"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "IT"
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Paroll"
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "Admin"
     }
   ]

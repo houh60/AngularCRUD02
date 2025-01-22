@@ -17,7 +17,18 @@ export class CreateEmployeeComponent implements OnInit {
 
   departments: Department[];
   previewPhoto = false;
-  employee: Employee;
+  employee: Employee = {
+    id: null,
+    name: null,
+    gender: null,
+    email: null,
+    phoneNumber: null,
+    contactPreference: null,
+    dateOfBirth: null,
+    department: 0,
+    isActive: null,
+    photoPath: null
+  };
   panelTitle: string;
 
   datePickerConfig: Partial<BsDatepickerConfig> = Object.assign({},
@@ -58,23 +69,17 @@ export class CreateEmployeeComponent implements OnInit {
 
   private getEmployee(id: number) {
     if (id == 0) {
-      this.employee = {
-        id: null,
-        name: null,
-        gender: null,
-        email: null,
-        phoneNumber: null,
-        contactPreference: null,
-        dateOfBirth: null,
-        department: 0,
-        isActive: null,
-        photoPath: null
-      };
-      this.panelTitle = 'Create'
+      this.panelTitle = 'Create';
       this.createEmployeeForm?.reset();
     } else {
-      this.panelTitle = 'Edit'
-      this.employee = Object.assign({}, this.employeeService.getEmployee(id));
+      this.panelTitle = 'Edit';
+      this.employeeService.getEmployee(id)
+        .subscribe({
+          next: employee => {
+            this.employee = employee
+          },
+          error: err => console.log("err: ", err)
+        });
     }
   }
 
@@ -129,9 +134,12 @@ export class CreateEmployeeComponent implements OnInit {
   }
 
   saveEmployee() {
-    const tempEmployee = Object.assign({}, this.employee);
-    this.employeeService.save(tempEmployee);
-    this.createEmployeeForm.reset();
-    this.router.navigate(['list']);
+    this.employeeService.addEmployee(this.employee).subscribe({
+      next: data => {
+        this.createEmployeeForm.reset();
+        this.router.navigate(['list']);
+      },
+      error: error => console.log("error: ", error)
+    });
   }
 }

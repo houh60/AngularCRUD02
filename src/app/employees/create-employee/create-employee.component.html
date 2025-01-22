@@ -212,7 +212,7 @@
           appSelectValidator="{{ departments && departments[0].id }}"
           #department="ngModel"
         >
-          <option *ngFor="let dept of departments" [ngValue]="dept.id">
+          <option *ngFor="let dept of departments" [value]="dept.id">
             {{ dept.name }}
           </option>
         </select>

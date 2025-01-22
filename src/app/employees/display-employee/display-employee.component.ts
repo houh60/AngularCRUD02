@@ -27,14 +27,11 @@ export class DisplayEmployeeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.employeeService.getDepartments()
-      .subscribe(data => {
-        if (Array.isArray(data)) {
-          this.departments = data;
-        } else {
-          this.error = data;
-        }
-      });
+    this.employeeService.getDepartments().subscribe({
+      next: data => this.departments = data,
+      error: error => this.error = error
+    });
+
     this.selectedEmployeeId = +this.route.snapshot.paramMap.get('id');
   }
 

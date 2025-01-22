@@ -45,14 +45,11 @@ export class CreateEmployeeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.employeeService.getDepartments()
-      .subscribe(data => {
-        if (Array.isArray(data)) {
-          this.departments = data;
-        } else {
-          this.error = data;
-        }
-      });
+    this.employeeService.getDepartments().subscribe({
+      next: data => this.departments = data,
+      error: error => this.error = error
+    });
+
     this.route.paramMap.subscribe(param => {
       const id = +param.get('id');
       this.getEmployee(id);

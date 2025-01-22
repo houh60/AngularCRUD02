@@ -3,6 +3,8 @@ import { Employee } from '../../models/employee.model';
 import { EmployeeService } from '../employee.service';
 import { Department } from '../../models/department.model';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ResolvedEmployeeList } from '../resolved-employeelist.model';
+import { catchError, of } from 'rxjs';
 
 @Component({
   selector: 'app-list-employees',
@@ -31,7 +33,7 @@ export class ListEmployeesComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {
-    const resolvedData: Employee[] = this.route.snapshot.data['employeeList'];
+    const resolvedData: Employee[] | string = this.route.snapshot.data['employeeList'];
     if (Array.isArray(resolvedData)) {
       this.employees = resolvedData;
     } else {
@@ -46,14 +48,10 @@ export class ListEmployeesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.employeeService.getDepartments()
-      .subscribe(data => {
-        if (Array.isArray(data)) {
-          this.departments = data;
-        } else {
-          this.error = data;
-        }
-      });
+    this.employeeService.getDepartments().subscribe({
+      next: data => this.departments = data,
+      error: error => this.error = error
+    });
   }
 
   filterEmployees(searchString: string) {

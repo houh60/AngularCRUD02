@@ -26,16 +26,16 @@ export class EmployeeService {
     private httpClient: HttpClient
   ) {}
 
-  getEmployees(): Observable<Employee[] | Error> {
-    return this.httpClient.get<Employee[]>(this.baseUrl + 'employees1')
+  getEmployees(): Observable<Employee[]> {
+    return this.httpClient.get<Employee[]>(this.baseUrl + 'employees')
       .pipe(catchError(this.handleError));
   }
 
   getEmployee(id: number): Employee {
-    return this.listEmployees.find(e => e.id == id);
+    return this.listEmployees?.find(e => e.id == id);
   }
 
-  getDepartments(): Observable<Department[] | Error> {
+  getDepartments(): Observable<Department[]> {
     return this.httpClient.get<Department[]>(this.baseUrl + 'departments')
       .pipe(catchError(this.handleError));
   }

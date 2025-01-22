@@ -1,49 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Employee } from '../models/employee.model';
 import { Department } from '../models/department.model';
-import { Observable, of, delay } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { Observable, of, catchError, throwError } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeeService {
 
-  private listEmployees: Employee[] = [
-    {
-      id: 1,
-      name: 'Mark',
-      gender: 'Male',
-      contactPreference: 'Email',
-      email: 'mark@pragimtech.com',
-      dateOfBirth: new Date('10/25/1988'),
-      department: 3,
-      isActive: 'yes',
-      photoPath: 'assets/images/mark.png'
-    },
-    {
-      id: 2,
-      name: 'Mary',
-      gender: 'Female',
-      contactPreference: 'Phone',
-      phoneNumber: 2345978640,
-      dateOfBirth: new Date('11/20/1979'),
-      department: 2,
-      isActive: 'yes',
-      photoPath: 'assets/images/mary.png'
-    },
-    {
-      id: 3,
-      name: 'John',
-      gender: 'Male',
-      contactPreference: 'Phone',
-      phoneNumber: 5432978640,
-      dateOfBirth: new Date('3/25/1976'),
-      department: 3,
-      isActive: 'no',
-      photoPath: 'assets/images/john.png'
-    },
-  ];
+  private listEmployees: Employee[];
 
   private departments: Department[] = [
     { id: 0, name: 'Select Department' },
@@ -54,14 +20,24 @@ export class EmployeeService {
     { id: 5, name: 'Admin' }
   ];
 
-  baseUrl = 'http://localhost:3000/employees';
+  baseUrl = 'http://localhost:3000/employees1';
 
   constructor(
     private httpClient: HttpClient
   ) {}
 
-  getEmployees(): Observable<Employee[]> {
-    return this.httpClient.get<Employee[]>(this.baseUrl);
+  getEmployees(): Observable<Employee[] | Error> {
+    return this.httpClient.get<Employee[]>(this.baseUrl)
+      .pipe(catchError(this.handleError));
+  }
+
+  private handleError(errorResponse: HttpErrorResponse) {
+    if (errorResponse.error instanceof ErrorEvent) {
+      console.log("Client side error: ", errorResponse.error.message);
+    } else {
+      console.log("Server side error: ", errorResponse);
+    }
+    return throwError(() => new Error('There is a problem with the service. We are notified and working on it. Please try again later.'));
   }
 
   getEmployee(id: number): Employee {

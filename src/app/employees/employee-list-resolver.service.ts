@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
 import { Employee } from '../models/employee.model';
-import { Observable } from 'rxjs';
+import { Observable, catchError, of } from 'rxjs';
 import { EmployeeService } from './employee.service';
 
 @Injectable({
@@ -14,6 +14,9 @@ export class EmployeeListResolverService implements Resolve<Employee[]> {
   ) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Employee[]> {
-    return this.employeeService.getEmployees();
+    return this.employeeService.getEmployees()
+      .pipe(
+        catchError(err => of(err))
+      );
   }
 }

@@ -14,6 +14,7 @@ export class EmployeeDetailsComponent implements OnInit {
 
   employee: Employee;
   id: number;
+  error: any;
 
   departments: Department[];
 
@@ -26,9 +27,12 @@ export class EmployeeDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.employeeService.getEmployees().subscribe(employees => {
-      this.employees = employees
-    });
+    const resolvedData: Employee[] = this.route.snapshot.data['employeeList'];
+    if (Array.isArray(resolvedData)) {
+      this.employees = resolvedData;
+    } else {
+      this.error = resolvedData;
+    }
     this.employeeService.getDepartments().subscribe(departments => this.departments = departments);
 
     this.route.params.pipe(

@@ -16,6 +16,7 @@ export class ListEmployeesComponent implements OnInit {
   departments: Department[];
   dataFromChild: any;
   private _searchTerm: string;
+  error: any;
 
   get searchTerm(): string {
     return this._searchTerm;
@@ -30,7 +31,12 @@ export class ListEmployeesComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {
-    this.employees = this.route.snapshot.data['employeeList'];
+    const resolvedData: Employee[] = this.route.snapshot.data['employeeList'];
+    if (Array.isArray(resolvedData)) {
+      this.employees = resolvedData;
+    } else {
+      this.error = resolvedData;
+    }
 
     if (this.route.snapshot.queryParamMap.has('searchTerm')) {
       this.searchTerm = this.route.snapshot.queryParamMap.get('searchTerm');

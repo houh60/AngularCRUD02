@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Employee } from '../../models/employee.model';
 import { EmployeeService } from '../employee.service';
 import { Department } from '../../models/department.model';
@@ -13,8 +13,11 @@ export class DisplayEmployeeComponent implements OnInit {
 
   @Input() employee: Employee;
   @Input() searchTerm: string
+  @Output() notifyDelete = new EventEmitter();
+
   departments: Department[];
   selectedEmployeeId: number;
+  confirmDelete = false;
 
   constructor(
     private employeeService: EmployeeService,
@@ -41,4 +44,8 @@ export class DisplayEmployeeComponent implements OnInit {
     this.router.navigate(['/edit', this.employee.id]);
   }
 
+  deleteEmployee() {
+    this.employeeService.deleteEmployee(this.employee.id);
+    this.notifyDelete.emit(this.employee.id);
+  }
 }

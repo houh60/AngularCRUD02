@@ -12,5 +12,6 @@
   <app-display-employee
     [employee]="employee"
     [searchTerm]="searchTerm"
+    (notifyDelete)="onDeleteNotification($event)"
   ></app-display-employee>
 </div>

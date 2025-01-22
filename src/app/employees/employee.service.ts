@@ -75,8 +75,15 @@ export class EmployeeService {
       employee.id = maxId + 1;
       this.listEmployees.push(employee);
     } else {
-      const foundIndex = this.listEmployees.findIndex(e => e.id == employee.id)
+      const foundIndex = this.listEmployees.findIndex(e => e.id == employee.id);
       this.listEmployees[foundIndex] = employee;
+    }
+  }
+
+  deleteEmployee(id: number) {
+    const i = this.listEmployees.findIndex(e => e.id == id);
+    if (i != -1) {
+      this.listEmployees.splice(i, 1)
     }
   }
 }

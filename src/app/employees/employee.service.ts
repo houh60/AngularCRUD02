@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Employee } from '../models/employee.model';
 import { Department } from '../models/department.model';
 import { Observable, of, delay } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -53,10 +54,14 @@ export class EmployeeService {
     { id: 5, name: 'Admin' }
   ];
 
-  constructor() {}
+  baseUrl = 'http://localhost:3000/employees';
+
+  constructor(
+    private httpClient: HttpClient
+  ) {}
 
   getEmployees(): Observable<Employee[]> {
-    return of(this.listEmployees).pipe(delay(1000));
+    return this.httpClient.get<Employee[]>(this.baseUrl);
   }
 
   getEmployee(id: number): Employee {

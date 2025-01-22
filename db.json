@@ -6,7 +6,7 @@
       "gender": "Male",
       "contactPreference": "Email",
       "email": "mark@pragimtech.com",
-      "dateOfBirth": "new Date('10/25/1988')",
+      "dateOfBirth": "10/25/1988",
       "department": 3,
       "isActive": "yes",
       "photoPath": "assets/images/mark.png"
@@ -17,7 +17,7 @@
       "gender": "Female",
       "contactPreference": "Phone",
       "phoneNumber": 2345978640,
-      "dateOfBirth": "new Date('11/20/1979')",
+      "dateOfBirth": "11/20/1979",
       "department": 2,
       "isActive": "yes",
       "photoPath": "assets/images/mary.png"
@@ -28,7 +28,7 @@
       "gender": "Male",
       "contactPreference": "Phone",
       "phoneNumber": 5432978640,
-      "dateOfBirth": "new Date('3/25/1976')",
+      "dateOfBirth": "3/25/1976",
       "department": 3,
       "isActive": "no",
       "photoPath": "assets/images/john.png"

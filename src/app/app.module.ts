@@ -18,6 +18,7 @@ import { EmployeeListResolverService } from './employees/employee-list-resolver.
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { EmployeeDetailsGuardService } from './employees/employee-details-guard.service';
 import { AccordionComponent } from './shared/accordion/accordion.component';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -37,9 +38,14 @@ import { AccordionComponent } from './shared/accordion/accordion.component';
     AppRoutingModule,
     FormsModule,
     BsDatepickerModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
-  providers: [CanDeactivateGuardService, EmployeeListResolverService, EmployeeDetailsGuardService],
+  providers: [
+    CanDeactivateGuardService,
+    EmployeeListResolverService,
+    EmployeeDetailsGuardService,
+    provideHttpClient(withInterceptorsFromDi())
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

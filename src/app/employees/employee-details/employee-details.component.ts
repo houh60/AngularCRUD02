@@ -33,7 +33,7 @@ export class EmployeeDetailsComponent implements OnInit {
     });
 
     this.employeeService.getDepartments().subscribe({
-      next: data => this.departments = data,
+      next: departments => this.departments = departments,
       error: error => this.error = error
     });
 

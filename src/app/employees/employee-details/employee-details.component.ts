@@ -27,12 +27,10 @@ export class EmployeeDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const resolvedData: Employee[] | string = this.route.snapshot.data['employeeList'];
-    if (Array.isArray(resolvedData)) {
-      this.employees = resolvedData;
-    } else {
-      this.error = resolvedData;
-    }
+    this.employeeService.getEmployees().subscribe({
+      next: employees => this.employees = employees,
+      error: err => console.log("err: ", err)
+    });
 
     this.employeeService.getDepartments().subscribe({
       next: data => this.departments = data,

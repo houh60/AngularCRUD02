@@ -9,8 +9,6 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 })
 export class EmployeeService {
 
-  private listEmployees: Employee[];
-
   departmentsUrl = 'http://localhost:3000/departments';
   employeesUrl = 'http://localhost:3000/employees';
 
@@ -25,7 +23,7 @@ export class EmployeeService {
 
   getEmployee(id: string): Observable<Employee> {
     return this.httpClient.get<Employee>(`${this.employeesUrl}/${id}`)
-      .pipe(catchError(this.handleError))
+      .pipe(catchError(this.handleError));
   }
 
   getDepartments(): Observable<Department[]> {
@@ -50,12 +48,9 @@ export class EmployeeService {
     }).pipe(catchError(this.handleError))
   }
 
-  deleteEmployee(id: string) {
-    console.log("id: ", id);
-    const i = this.listEmployees.findIndex(e => e.id == id);
-    if (i != -1) {
-      this.listEmployees.splice(i, 1)
-    }
+  deleteEmployee(id: string): Observable<void> {
+    return this.httpClient.delete<void>(`${this.employeesUrl}/${id}`)
+      .pipe(catchError(this.handleError));
   }
 
   private handleError(errorResponse: HttpErrorResponse) {

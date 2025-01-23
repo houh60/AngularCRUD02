@@ -1,12 +1,12 @@
 export interface Employee {
-  id: number;
+  id: string;
   name: string;
   gender: string;
   email?: string;
   phoneNumber?: number;
   contactPreference: string;
   dateOfBirth: Date;
-  department: number;
+  department: string;
   isActive: string;
   photoPath?: string;
 }

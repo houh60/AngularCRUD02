@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { EmployeeService } from '../employee.service';
 import { Employee } from '../../models/employee.model';
 import { Department } from '../../models/department.model';
-import { concatMap, of } from 'rxjs';
+import { concatMap } from 'rxjs';
 
 @Component({
   selector: 'app-employee-details',
@@ -13,7 +13,7 @@ import { concatMap, of } from 'rxjs';
 export class EmployeeDetailsComponent implements OnInit {
 
   employee: Employee;
-  id: number;
+  id: string;
   error: any;
 
   departments: Department[];
@@ -41,7 +41,8 @@ export class EmployeeDetailsComponent implements OnInit {
 
     this.route.params.pipe(
       concatMap(params => {
-        this.id = +params['id'];
+        console.log("params: ", params);
+        this.id = params['id'];
         return this.employeeService.getEmployee(this.id);
       })
     ).subscribe({
@@ -51,14 +52,14 @@ export class EmployeeDetailsComponent implements OnInit {
   }
 
   viewNextEmployee() {
-    if (this.id < this.employees.length) {
-      this.id = this.id + 1
+    let findIndex = this.employees.findIndex(e => e.id === this.employee.id);
+    if (findIndex < this.employees.length - 1) {
+      findIndex = findIndex + 1;
     } else {
-      this.id = 1;
+      findIndex = 0;
     }
-    this.router.navigate(['/employees', this.id], {
-      queryParamsHandling: 'preserve'
-    });
+    const id = this.employees[findIndex].id;
+    this.router.navigate(['employees', id], { queryParamsHandling: 'preserve' })
   }
 
 }

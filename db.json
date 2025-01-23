@@ -4,12 +4,13 @@
       "id": "1",
       "name": "Mark",
       "gender": "Male",
-      "contactPreference": "Email",
+      "contactPreference": "Phone",
       "email": "mark@pragimtech.com",
-      "dateOfBirth": "10/25/1988",
+      "dateOfBirth": "1988-10-25T05:00:00.000Z",
       "department": 3,
       "isActive": "yes",
-      "photoPath": "assets/images/mark.png"
+      "photoPath": "assets/images/mark.png",
+      "phoneNumber": "1234567891"
     },
     {
       "id": "2",
@@ -32,6 +33,18 @@
       "department": 3,
       "isActive": "no",
       "photoPath": "assets/images/john.png"
+    },
+    {
+      "id": "1737593540408",
+      "name": "William Hou",
+      "gender": "Male",
+      "email": "williamhou38@yahoo.com",
+      "phoneNumber": "8562810647",
+      "contactPreference": "Email",
+      "dateOfBirth": "2007-01-01T06:00:00.000Z",
+      "department": "3",
+      "isActive": "yes",
+      "photoPath": "assets/images/mark.png"
     }
   ],
   "departments": [

@@ -16,7 +16,7 @@ export class DisplayEmployeeComponent implements OnInit {
   @Output() notifyDelete = new EventEmitter();
 
   departments: Department[];
-  selectedEmployeeId: number;
+  selectedEmployeeId: string;
   confirmDelete = false;
   error: any;
 
@@ -32,7 +32,7 @@ export class DisplayEmployeeComponent implements OnInit {
       error: error => this.error = error
     });
 
-    this.selectedEmployeeId = +this.route.snapshot.paramMap.get('id');
+    this.selectedEmployeeId = this.route.snapshot.paramMap.get('id');
   }
 
   getEmployeeNameAndGender(): string {

@@ -25,7 +25,7 @@ export class CreateEmployeeComponent implements OnInit {
     phoneNumber: null,
     contactPreference: null,
     dateOfBirth: null,
-    department: 0,
+    department: '0',
     isActive: null,
     photoPath: null
   };
@@ -47,6 +47,7 @@ export class CreateEmployeeComponent implements OnInit {
   yes = false;
   no = false;
   error: any;
+  createUpdateEmployee: any;
 
   constructor(
     private changeDetector: ChangeDetectorRef,
@@ -62,13 +63,13 @@ export class CreateEmployeeComponent implements OnInit {
     });
 
     this.route.paramMap.subscribe(param => {
-      const id = +param.get('id');
+      const id = param.get('id');
       this.getEmployee(id);
     });
   }
 
-  private getEmployee(id: number) {
-    if (id == 0) {
+  private getEmployee(id: string) {
+    if (id == '0') {
       this.panelTitle = 'Create';
       this.createEmployeeForm?.reset();
     } else {
@@ -76,6 +77,7 @@ export class CreateEmployeeComponent implements OnInit {
       this.employeeService.getEmployee(id)
         .subscribe({
           next: employee => {
+            employee.dateOfBirth = new Date(employee.dateOfBirth);
             this.employee = employee
           },
           error: err => console.log("err: ", err)
@@ -134,12 +136,18 @@ export class CreateEmployeeComponent implements OnInit {
   }
 
   saveEmployee() {
-    this.employeeService.addEmployee(this.employee).subscribe({
-      next: data => {
+    if (this.employee.id === null) {
+      this.createUpdateEmployee = this.employeeService.addEmployee(this.employee);
+    } else {
+      this.createUpdateEmployee = this.employeeService.updateEmployee(this.employee);
+    }
+
+    this.createUpdateEmployee.subscribe({
+      next: (data: Employee) => {
         this.createEmployeeForm.reset();
-        this.router.navigate(['list']);
+        this.router.navigate(['/list']);
       },
-      error: error => console.log("error: ", error)
+      error: (error: any) => console.log('error', error)
     });
   }
 }

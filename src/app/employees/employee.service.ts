@@ -23,7 +23,7 @@ export class EmployeeService {
       .pipe(catchError(this.handleError));
   }
 
-  getEmployee(id: number): Observable<Employee> {
+  getEmployee(id: string): Observable<Employee> {
     return this.httpClient.get<Employee>(`${this.employeesUrl}/${id}`)
       .pipe(catchError(this.handleError))
   }
@@ -34,6 +34,7 @@ export class EmployeeService {
   }
 
   addEmployee(employee: Employee): Observable<Employee> {
+    employee.id = '' + new Date().getTime();
     return this.httpClient.post<Employee>(this.employeesUrl, employee, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
@@ -49,7 +50,8 @@ export class EmployeeService {
     }).pipe(catchError(this.handleError))
   }
 
-  deleteEmployee(id: number) {
+  deleteEmployee(id: string) {
+    console.log("id: ", id);
     const i = this.listEmployees.findIndex(e => e.id == id);
     if (i != -1) {
       this.listEmployees.splice(i, 1)
